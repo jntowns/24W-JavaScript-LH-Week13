@@ -15,11 +15,28 @@ const chargeMeter = document.querySelector('#battery dd:nth-of-type(2) progress'
 
 // STEP 3c: Update the charge level
 
+function updateBatteryStatus(battery) {
+    chargeStatus.textContent = battery.chargeStatus;
+    chargeLevel.textContent = battery.chargeLevel;
+    chargeMeter.value = battery.level * 100;
+}
 
 // STEP 2a: Using the getBattery() method of the navigator object, 
 //create a promise to retrieve the battery information
 
 // STEP 2b: See what the battery object contains
+
+navigator.getBattery().then(function(battery) {
+    updateBatteryStatus(battery);
+
+    battery.onchargingchance = function() {
+        updateBatteryStatus(battery);
+    };
+
+    battery.onlevelchange = function() {
+        updateBatteryStatus(battery);
+    };
+});
 
 // STEP 3d: Update the battery information when the promise resolves
 

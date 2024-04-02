@@ -22,12 +22,30 @@ const statusMsg = document.querySelector('#status');
 
 // STEP 4b: Output a suitable error message
 
+function error() {
+    statusMsg.textContent = "Your browser does not support device orientation";
+}
 
 /* Script Logic
 -------------------------------------------------- */
 // STEP 2a: Check support for the DeviceOrientationEvent
 
 // STEP 2b: Do something helpful if there is no support for the DeviceOrientationEvent
+
+if (!window.DeviceOrientationEvent) {
+    error();
+} else {
+    statusMsg.textContent = "Loading..."
+    window.addEventListener("deviceorientation", (event) => {
+        alphaValue.textContent = event.alpha;
+        betaValue.textContent = event.beta;
+        gammaValue.textContent = event.gamma;
+
+        alphaSlider.value = event.alpha;
+        betaSlider.value = event.beta;
+        gammaSlider.value = event.gamma;
+    });
+}
 
 // STEP 3a: Build an event listener for the 'deviceorientation' event, and build out an anonymous callback function, passing in the event itself
 
@@ -43,4 +61,4 @@ const statusMsg = document.querySelector('#status');
 
 // STEP 3g: Use the same value to update the position of the slider
 
-/* Learn more at https://developer.mozilla.org/en-US/docs/Web/API/DeviceOrientationEvent */
+/* Learn more at https://developer.mozilla.org/en-US/docs/Web/API/DeviceOrientationEvent */ 
