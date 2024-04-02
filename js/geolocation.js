@@ -19,7 +19,8 @@ const mapLink = document.querySelector('#mapLink');
 // STEP 3d: Build out the link to OpenStreetMap
 
 function success(position) {
-
+    latitude.textContent = position.coords.latitude;
+    longitude.textContent = position.coords.longitude;S
 }
 
 // STEP 4a: Construct the error() function
